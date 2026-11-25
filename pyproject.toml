@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "plugin-platform-github"
+version = "0.1.0"  # the plugin's own release (CHANGELOG.md); the app shows it on the Plugins view
+description = "GitHub for Liminal: the account's repositories, open pull requests and latest Actions runs, read through the gh CLI where it is signed in (no token kept), else with a token through the login."
+readme = "README.md"
+requires-python = ">=3.10"
+# the library it plugs into (the machine kind: liminal_libs.machines, plugin API 2.2: its API cards; machines/endpoint.py,
+# the client GitHub's REST API is asked with): the floor its Source Control siblings share
+dependencies = ["liminal-libs>=1.94.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.entry-points."liminal.providers"]
+github = "plugin_platform_github"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
